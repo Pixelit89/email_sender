@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Notebook</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+</head>
+<body>
+<div class="container">
+    <form method="post" action="{% url 'add_note' %}">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Add note" class="btn btn-success" />
+    </form>
+    <table class="table table-bordered table-striped">
+    {% for object in object_list %}
+        <tr>
+            <td>
+                <a class="btn btn-danger" href="{% url 'del_note' note_id=object.id %}">
+                    Delete note
+                </a>
+            </td>
+            <td>
+                {{ object.name }}
+            </td>
+            <td>{{ object.email }}
+            </td>
+            <td>
+                <form method="post" action="{% url 'send_mail' mail_to=object.email%}">
+                    {% csrf_token %}
+                    <input type="submit" value="Send data" />
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+</div>
+<script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+</body>
+</html>
