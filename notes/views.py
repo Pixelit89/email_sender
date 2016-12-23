@@ -46,14 +46,8 @@ def send(request, mail_to):
     code = glob.glob('**/code.zip', recursive=True)
 
     email = EmailMessage(
-        subject='Test task',
-        body="""Hello, my name is Andrei Ivashkevich.
-                I saw a test task on your site, so I decided to make it.
-                But unfortunately I am not a Java Developer, but Python Developer.
-                So I made in on Python.
-                Sorry for interrupting you. But if you would have a time to estimate my work I will be very appreciate for this.
-                Thank you.
-                """,
+        subject='Header',
+        body="Text",
         to=[mail_to],
     )
     email.attach_file(cv[0])
